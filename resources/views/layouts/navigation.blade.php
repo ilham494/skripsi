@@ -10,10 +10,12 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
 
-                    <a href="{{ route('dashboard') }}">
-                        <span class="font-bold text-xl">
-                            Law Firm
-                        </span>
+                    <a href="{{ route('dashboard') }}" class="flex items-center">
+                        <img
+                        src="{{ asset('images/logo.png') }}"
+                        alt="Logo Sistem Informasi Hukum"
+                    class="h-10 w-auto"
+                        >
                     </a>
 
                 </div>
