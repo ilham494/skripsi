@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2026 at 03:10 AM
+-- Generation Time: Aug 11, 2026 at 03:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.3.33
 
@@ -43,7 +43,8 @@ CREATE TABLE `audit_logs` (
 
 INSERT INTO `audit_logs` (`id`, `user_id`, `aktivitas`, `modul`, `detail`, `created_at`, `updated_at`) VALUES
 (1, 3, 'Menambah klien', 'Client', 'Menambahkan data klien zay', '2026-08-04 00:43:56', '2026-08-04 00:43:56'),
-(2, 3, 'Menambah perkara', 'Legal Case', 'Menambahkan perkara sengketa', '2026-08-04 00:51:58', '2026-08-04 00:51:58');
+(2, 3, 'Menambah perkara', 'Legal Case', 'Menambahkan perkara sengketa', '2026-08-04 00:51:58', '2026-08-04 00:51:58'),
+(3, 3, 'Menghapus perkara', 'Legal Case', 'Menghapus perkara dcf', '2026-08-07 22:42:07', '2026-08-07 22:42:07');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,6 @@ CREATE TABLE `cases` (
 --
 
 INSERT INTO `cases` (`id`, `client_id`, `lawyer_id`, `nomor_perkara`, `judul_perkara`, `jenis_perkara`, `status`, `tanggal_mulai`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(2, 1, 1, 'dc', 'dcf', 'edfe', 'Baru', '2026-08-04', 'acd', '2026-08-03 21:33:50', '2026-08-03 21:33:50'),
 (3, 2, 1, '12', 'sengketa', 'anu', 'Berjalan', '2026-08-05', 'asa', '2026-08-04 00:51:58', '2026-08-04 00:51:58');
 
 -- --------------------------------------------------------
@@ -142,25 +142,7 @@ CREATE TABLE `documents` (
 --
 
 INSERT INTO `documents` (`id`, `legal_case_id`, `nama_dokumen`, `file`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 2, 'bukti', 'documents/YXKGzaF02v2qEeTK9gKxH0rf7hjGgARSAJkg2tEL.pdf', NULL, '2026-08-03 21:53:44', '2026-08-03 21:53:44');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `dokumen`
---
-
-CREATE TABLE `dokumen` (
-  `id_dokumen` int(11) NOT NULL,
-  `id_kategori` int(11) NOT NULL,
-  `id_kasus` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `nama_dokumen` varchar(150) NOT NULL,
-  `nama_file` varchar(150) NOT NULL,
-  `path_file` varchar(255) NOT NULL,
-  `tanggal_upload` datetime DEFAULT current_timestamp(),
-  `keterangan` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(2, 3, 'bukti', 'documents/HJwZ8n4fXEyV61vvAkD2Z0zVIeMkBdxQyMRkcpLp.txt', NULL, '2026-08-07 22:47:54', '2026-08-07 22:47:54');
 
 -- --------------------------------------------------------
 
@@ -195,13 +177,6 @@ CREATE TABLE `hearings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `hearings`
---
-
-INSERT INTO `hearings` (`id`, `legal_case_id`, `tanggal_sidang`, `jam`, `tempat`, `agenda`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, '2026-08-05', '22:00:00', 'kajari', 'bahas masalah', 'Terjadwal', '2026-08-03 22:05:57', '2026-08-03 22:05:57');
 
 -- --------------------------------------------------------
 
@@ -241,32 +216,6 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kasus`
---
-
-CREATE TABLE `kasus` (
-  `id_kasus` int(11) NOT NULL,
-  `nama_klien` varchar(100) NOT NULL,
-  `nama_kasus` varchar(150) NOT NULL,
-  `tanggal_masuk` date NOT NULL,
-  `status` enum('Proses','Selesai') NOT NULL DEFAULT 'Proses'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `kategori_dokumen`
---
-
-CREATE TABLE `kategori_dokumen` (
-  `id_kategori` int(11) NOT NULL,
-  `nama_kategori` varchar(100) NOT NULL,
-  `keterangan` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `lawyers`
 --
 
@@ -288,19 +237,6 @@ CREATE TABLE `lawyers` (
 
 INSERT INTO `lawyers` (`id`, `nama`, `email`, `telepon`, `nomor_izin_advokat`, `spesialisasi`, `alamat`, `created_at`, `updated_at`) VALUES
 (1, 'Budi Santoso, SH', 'budi@odslawfirm.com', '08123456789', 'KAI-001-2026', 'Perdata', 'Jakarta', '2026-08-03 20:48:10', '2026-08-03 20:50:44');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `log_aktivitas`
---
-
-CREATE TABLE `log_aktivitas` (
-  `id_log` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `aktivitas` varchar(255) NOT NULL,
-  `waktu` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -370,20 +306,6 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengguna`
---
-
-CREATE TABLE `pengguna` (
-  `id_user` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` enum('Admin','Staff Administrasi') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `sessions`
 --
 
@@ -401,9 +323,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('aLLmUbUnzyUor8nYx4FAPtMFgKDcswQ0CDbeqxmX', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', 'eyJfdG9rZW4iOiJ0dUlMTGxlS2V1ZjJIUGJIWWJwVkk0SFR1MUFYdVJpYVZiZ1NrbVVuIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cLzEyNy4wLjAuMTo4MDAwXC9jYXNlc1wvMyIsInJvdXRlIjoiY2FzZXMuc2hvdyJ9LCJfZmxhc2giOnsib2xkIjpbXSwibmV3IjpbXX0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjozfQ==', 1785984422),
-('dn9xJsWxyaIdXIzFOjZoQuK7XK5XbBt4U42ff3Ld', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', 'eyJfdG9rZW4iOiJXdXFiN0REZGhXTzZsZWNNMmQwa2JXamhGQUxiem5aekhtcllQQnJtIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cLzEyNy4wLjAuMTo4MDAwIiwicm91dGUiOm51bGx9LCJfZmxhc2giOnsib2xkIjpbXSwibmV3IjpbXX19', 1785982362),
-('T3WBSL2yQmPVpnNc1iytzZj3j04LfafwYKi13DQ5', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', 'eyJfdG9rZW4iOiI4MnhLdlNSTFlMTzA2bzY5TXNKeWZPS2w0dUR0dkdRT1B0dW9TdTMwIiwidXJsIjpbXSwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cLzEyNy4wLjAuMTo4MDAwXC9oZWFyaW5ncyIsInJvdXRlIjoiaGVhcmluZ3MuaW5kZXgifSwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI6NH0=', 1785984408);
+('BkOgmrjAIClZzwkgAg0hPZmMs80BACTkwazkbN3B', 5, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', 'eyJfdG9rZW4iOiJHeHQ4R051alNXTVV5V1Y3dWxpcExMVUhCZEh5Qmc0MGd2RUVZUTlDIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvMTI3LjAuMC4xOjgwMDBcL2Rhc2hib2FyZCIsInJvdXRlIjoiZGFzaGJvYXJkIn0sImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjo1fQ==', 1786288370);
 
 -- --------------------------------------------------------
 
@@ -429,7 +349,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
 (3, 'admin lods law firm', 'admin@odslawfirm.com', NULL, '$2y$12$ltRkfo7OXTvHgXc/kj.Cie/bHXv5Mjf5GuCgzVqk1Tej/fOwfJ0Ue', NULL, '2026-08-04 00:32:16', '2026-08-04 00:32:16', 'admin'),
-(4, 'mai', 'mai@mail.com', NULL, '$2y$12$9f2Lm54qewK1Elwkut4qcei.u01aV.lgYFF8EW866aUL2/RXFFuaq', NULL, '2026-08-04 01:26:49', '2026-08-04 01:26:49', 'staff');
+(5, 'staff', 'staff@odslawfirm.com', NULL, '$2y$12$IVSRW3HNKva74PqelZXo8e/Ss5Ru.gV94GuENbd4UAbJYhxMvxHXG', NULL, '2026-08-07 21:55:46', '2026-08-07 21:55:46', 'staff'),
+(6, 'lawyer', 'lawyer@odslawfirm.com', NULL, '$2y$12$8J/6EKY1ULzIxgkf7VF.1.woCLSOuFeBr5Ufz1U6Fmm6LFjwI8hcC', NULL, '2026-08-07 21:56:16', '2026-08-07 21:56:16', 'lawyer');
 
 --
 -- Indexes for dumped tables
@@ -478,15 +399,6 @@ ALTER TABLE `documents`
   ADD KEY `documents_legal_case_id_foreign` (`legal_case_id`);
 
 --
--- Indexes for table `dokumen`
---
-ALTER TABLE `dokumen`
-  ADD PRIMARY KEY (`id_dokumen`),
-  ADD KEY `fk_dokumen_kategori` (`id_kategori`),
-  ADD KEY `fk_dokumen_kasus` (`id_kasus`),
-  ADD KEY `fk_dokumen_user` (`id_user`);
-
---
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -515,29 +427,10 @@ ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kasus`
---
-ALTER TABLE `kasus`
-  ADD PRIMARY KEY (`id_kasus`);
-
---
--- Indexes for table `kategori_dokumen`
---
-ALTER TABLE `kategori_dokumen`
-  ADD PRIMARY KEY (`id_kategori`);
-
---
 -- Indexes for table `lawyers`
 --
 ALTER TABLE `lawyers`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `log_aktivitas`
---
-ALTER TABLE `log_aktivitas`
-  ADD PRIMARY KEY (`id_log`),
-  ADD KEY `fk_log_user` (`id_user`);
 
 --
 -- Indexes for table `migrations`
@@ -557,13 +450,6 @@ ALTER TABLE `notifications`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
-
---
--- Indexes for table `pengguna`
---
-ALTER TABLE `pengguna`
-  ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `sessions`
@@ -588,7 +474,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `audit_logs`
 --
 ALTER TABLE `audit_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cases`
@@ -606,13 +492,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `dokumen`
---
-ALTER TABLE `dokumen`
-  MODIFY `id_dokumen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -633,28 +513,10 @@ ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `kasus`
---
-ALTER TABLE `kasus`
-  MODIFY `id_kasus` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `kategori_dokumen`
---
-ALTER TABLE `kategori_dokumen`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `lawyers`
 --
 ALTER TABLE `lawyers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `log_aktivitas`
---
-ALTER TABLE `log_aktivitas`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -669,16 +531,10 @@ ALTER TABLE `notifications`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `pengguna`
---
-ALTER TABLE `pengguna`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -704,24 +560,10 @@ ALTER TABLE `documents`
   ADD CONSTRAINT `documents_legal_case_id_foreign` FOREIGN KEY (`legal_case_id`) REFERENCES `cases` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `dokumen`
---
-ALTER TABLE `dokumen`
-  ADD CONSTRAINT `fk_dokumen_kasus` FOREIGN KEY (`id_kasus`) REFERENCES `kasus` (`id_kasus`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_dokumen_kategori` FOREIGN KEY (`id_kategori`) REFERENCES `kategori_dokumen` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_dokumen_user` FOREIGN KEY (`id_user`) REFERENCES `pengguna` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `hearings`
 --
 ALTER TABLE `hearings`
   ADD CONSTRAINT `hearings_legal_case_id_foreign` FOREIGN KEY (`legal_case_id`) REFERENCES `cases` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `log_aktivitas`
---
-ALTER TABLE `log_aktivitas`
-  ADD CONSTRAINT `fk_log_user` FOREIGN KEY (`id_user`) REFERENCES `pengguna` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `notifications`
