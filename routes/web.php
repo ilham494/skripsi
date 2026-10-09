@@ -16,8 +16,9 @@ use App\Http\Controllers\ReportController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
+
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
@@ -110,6 +111,19 @@ Route::get('/check-mbstring', function () {
         'loaded_extensions' => get_loaded_extensions(),
         'extension_dir' => ini_get('extension_dir'),
     ]);
+});
+
+Route::get('/dev/mail-log', function () {
+
+    abort_unless(app()->environment('local'), 404);
+
+    $logFile = storage_path('logs/laravel.log');
+
+    $logs = File::exists($logFile)
+        ? File::get($logFile)
+        : '';
+
+    return view('mail-log', compact('logs'));
 });
 
 require __DIR__.'/auth.php';

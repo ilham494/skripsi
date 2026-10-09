@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lawyer;
+use App\Models\AuditLog;
 
 class LawyerController extends Controller
 {
@@ -27,8 +28,7 @@ class LawyerController extends Controller
             'nama' => 'required',
         ]);
 
-
-        Lawyer::create([
+        $lawyer = Lawyer::create([
             'nama' => $request->nama,
             'email' => $request->email,
             'telepon' => $request->telepon,
@@ -37,10 +37,16 @@ class LawyerController extends Controller
             'alamat' => $request->alamat,
         ]);
 
+        AuditLog::create([
+            'user_id' => auth()->id(),
+            'aktivitas' => 'Menambah lawyer',
+            'modul' => 'Lawyer',
+            'detail' => 'Menambahkan data lawyer ' . $lawyer->nama,
+        ]);
 
         return redirect()
             ->route('lawyers.index')
-            ->with('success','Data lawyer berhasil ditambahkan');
+            ->with('success', 'Data lawyer berhasil ditambahkan');
     }
 
 
@@ -56,7 +62,6 @@ class LawyerController extends Controller
     {
         $lawyer = Lawyer::findOrFail($id);
 
-
         $lawyer->update([
             'nama' => $request->nama,
             'email' => $request->email,
@@ -66,10 +71,16 @@ class LawyerController extends Controller
             'alamat' => $request->alamat,
         ]);
 
+        AuditLog::create([
+            'user_id' => auth()->id(),
+            'aktivitas' => 'Mengubah lawyer',
+            'modul' => 'Lawyer',
+            'detail' => 'Mengubah data lawyer ' . $lawyer->nama,
+        ]);
 
         return redirect()
             ->route('lawyers.index')
-            ->with('success','Data lawyer berhasil diperbarui');
+            ->with('success', 'Data lawyer berhasil diperbarui');
     }
 
 
@@ -77,11 +88,19 @@ class LawyerController extends Controller
     {
         $lawyer = Lawyer::findOrFail($id);
 
+        $lawyerName = $lawyer->nama;
+
         $lawyer->delete();
 
+        AuditLog::create([
+            'user_id' => auth()->id(),
+            'aktivitas' => 'Menghapus lawyer',
+            'modul' => 'Lawyer',
+            'detail' => 'Menghapus data lawyer ' . $lawyerName,
+        ]);
 
         return redirect()
             ->route('lawyers.index')
-            ->with('success','Data lawyer berhasil dihapus');
+            ->with('success', 'Data lawyer berhasil dihapus');
     }
 }

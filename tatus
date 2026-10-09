@@ -1,0 +1,24 @@
+warning: in the working copy of 'resources/views/audit/index.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/cases/create.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/cases/edit.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/cases/index.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/cases/show.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/clients/index.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/documents/create.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/documents/index.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/hearings/create.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/hearings/index.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/lawyers/create.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/lawyers/edit.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/lawyers/index.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/reports/case-pdf.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/users/create.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/users/edit.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/users/index.blade.php', CRLF will be replaced by LF the next time Git touches it
+resources/views/audit/index.blade.php:20: trailing whitespace.
+[32m+[m[41m                        [m
+resources/views/audit/index.blade.php:440: trailing whitespace.
+[32m+[m[41m        [m
+resources/views/hearings/index.blade.php:20: trailing whitespace.
+[32m+[m[41m            [m
+resources/views/hearings/index.blade.php:742: new blank line at EOF.

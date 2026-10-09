@@ -1,98 +1,231 @@
 <x-app-layout>
-
 <x-slot name="header">
-<h2 class="font-semibold text-xl">
-Edit Lawyer
-</h2>
+    <div>
+        <h2 class="text-2xl font-bold text-slate-800">
+            Edit Lawyer
+        </h2>
+
+        <p class="mt-1 text-sm text-slate-500">
+            Perbarui informasi lawyer yang terdaftar.
+        </p>
+    </div>
 </x-slot>
 
 
-<div class="py-12">
+<div class="py-8">
 
-<div class="max-w-3xl mx-auto">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
+        {{-- Validation Error --}}
+        @if ($errors->any())
 
-<form method="POST"
-action="{{ route('lawyers.update',$lawyer->id) }}">
+            <div class="mb-6 rounded-lg border border-red-200 bg-red-50 p-4">
 
-@csrf
-@method('PUT')
+                <div class="flex items-center gap-2">
 
+                    <svg class="w-5 h-5 text-red-600"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 8v4m0 4h.01M10.29 3.86l-8.18 14A2 2 0 003.84 21h16.32a2 2 0 001.73-3.14l-8.18-14a2 2 0 001.73-3.14z"/>
+                    </svg>
 
-<div class="mb-4">
+                    <p class="font-semibold text-red-800">
+                        Data belum dapat diperbarui
+                    </p>
 
-<label>Nama Lawyer</label>
+                </div>
 
-<input name="nama"
-value="{{ $lawyer->nama }}"
-class="border rounded w-full p-2">
+                <ul class="mt-2 ml-7 list-disc text-sm text-red-700">
 
-</div>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
 
+                </ul>
 
-<div class="mb-4">
+            </div>
 
-<label>Email</label>
-
-<input name="email"
-value="{{ $lawyer->email }}"
-class="border rounded w-full p-2">
-
-</div>
-
-
-<div class="mb-4">
-
-<label>Telepon</label>
-
-<input name="telepon"
-value="{{ $lawyer->telepon }}"
-class="border rounded w-full p-2">
-
-</div>
+        @endif
 
 
-<div class="mb-4">
+        {{-- Form --}}
+        <form method="POST"
+              action="{{ route('lawyers.update', $lawyer->id) }}"
+              class="bg-white rounded-xl border border-slate-200
+                     shadow-sm p-6">
 
-<label>Nomor Izin Advokat</label>
-
-<input name="nomor_izin_advokat"
-value="{{ $lawyer->nomor_izin_advokat }}"
-class="border rounded w-full p-2">
-
-</div>
-
-
-<div class="mb-4">
-
-<label>Spesialisasi</label>
-
-<input name="spesialisasi"
-value="{{ $lawyer->spesialisasi }}"
-class="border rounded w-full p-2">
-
-</div>
+            @csrf
+            @method('PUT')
 
 
-<div class="mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-<label>Alamat</label>
+                {{-- Nama --}}
+                <div class="md:col-span-2">
 
-<textarea name="alamat"
-class="border rounded w-full p-2">{{ $lawyer->alamat }}</textarea>
+                    <label for="nama"
+                           class="block mb-2 text-sm font-medium text-slate-700">
+                        Nama Lawyer
+                    </label>
 
-</div>
+                    <input type="text"
+                           name="nama"
+                           id="nama"
+                           value="{{ old('nama', $lawyer->nama) }}"
+                           class="border border-slate-300 rounded-lg
+                                  w-full p-2.5
+                                  focus:border-blue-500
+                                  focus:ring-blue-500">
+
+                    @error('nama')
+                        <p class="mt-1 text-sm text-red-600">
+                            {{ $message }}
+                        </p>
+                    @enderror
+
+                </div>
 
 
-<button class="bg-green-600 text-white px-4 py-2 rounded">
-Update
-</button>
+                {{-- Email --}}
+                <div>
+
+                    <label for="email"
+                           class="block mb-2 text-sm font-medium text-slate-700">
+                        Email
+                    </label>
+
+                    <input type="email"
+                           name="email"
+                           id="email"
+                           value="{{ old('email', $lawyer->email) }}"
+                           class="border border-slate-300 rounded-lg
+                                  w-full p-2.5
+                                  focus:border-blue-500
+                                  focus:ring-blue-500">
+
+                    @error('email')
+                        <p class="mt-1 text-sm text-red-600">
+                            {{ $message }}
+                        </p>
+                    @enderror
+
+                </div>
 
 
-</form>
+                {{-- Telepon --}}
+                <div>
+
+                    <label for="telepon"
+                           class="block mb-2 text-sm font-medium text-slate-700">
+                        Telepon
+                    </label>
+
+                    <input type="text"
+                           name="telepon"
+                           id="telepon"
+                           value="{{ old('telepon', $lawyer->telepon) }}"
+                           class="border border-slate-300 rounded-lg
+                                  w-full p-2.5
+                                  focus:border-blue-500
+                                  focus:ring-blue-500">
+
+                </div>
 
 
-</div>
+                {{-- Nomor Izin --}}
+                <div>
+
+                    <label for="nomor_izin_advokat"
+                           class="block mb-2 text-sm font-medium text-slate-700">
+                        Nomor Izin Advokat
+                    </label>
+
+                    <input type="text"
+                           name="nomor_izin_advokat"
+                           id="nomor_izin_advokat"
+                           value="{{ old('nomor_izin_advokat', $lawyer->nomor_izin_advokat) }}"
+                           class="border border-slate-300 rounded-lg
+                                  w-full p-2.5
+                                  focus:border-blue-500
+                                  focus:ring-blue-500">
+
+                </div>
+
+
+                {{-- Spesialisasi --}}
+                <div>
+
+                    <label for="spesialisasi"
+                           class="block mb-2 text-sm font-medium text-slate-700">
+                        Spesialisasi
+                    </label>
+
+                    <input type="text"
+                           name="spesialisasi"
+                           id="spesialisasi"
+                           value="{{ old('spesialisasi', $lawyer->spesialisasi) }}"
+                           class="border border-slate-300 rounded-lg
+                                  w-full p-2.5
+                                  focus:border-blue-500
+                                  focus:ring-blue-500">
+
+                </div>
+
+
+                {{-- Alamat --}}
+                <div class="md:col-span-2">
+
+                    <label for="alamat"
+                           class="block mb-2 text-sm font-medium text-slate-700">
+                        Alamat
+                    </label>
+
+                    <textarea name="alamat"
+                              id="alamat"
+                              rows="4"
+                              class="border border-slate-300 rounded-lg
+                                     w-full p-2.5
+                                     focus:border-blue-500
+                                     focus:ring-blue-500">{{ old('alamat', $lawyer->alamat) }}</textarea>
+
+                </div>
+
+            </div>
+
+
+            {{-- Buttons --}}
+            <div class="flex items-center justify-end gap-3 mt-6 pt-5
+                        border-t border-slate-100">
+
+                <a href="{{ route('lawyers.index') }}"
+                   class="px-4 py-2.5 rounded-lg
+                          border border-slate-300
+                          text-slate-600
+                          hover:bg-slate-50
+                          text-sm font-medium transition">
+
+                    Batal
+
+                </a>
+
+                <button type="submit"
+                        class="bg-blue-600 hover:bg-blue-700
+                               text-white px-5 py-2.5 rounded-lg
+                               text-sm font-semibold transition">
+
+                    Simpan Perubahan
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
 

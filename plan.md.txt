@@ -1,0 +1,775 @@
+# ODS LAW FIRM — PROJECT CONTEXT
+
+## 1. PROJECT
+
+Nama aplikasi: ODS Law Firm
+
+Project adalah aplikasi Sistem Informasi Hukum untuk Law Firm.
+
+Fitur utama:
+- User Management
+- Klien
+- Perkara
+- Lawyer
+- Dokumen
+- Agenda Sidang
+- Dashboard berdasarkan role
+
+Tujuan pengembangan:
+Membuat UI/UX lebih modern, clean, profesional, dan user-friendly tanpa merusak backend/functionality yang sudah berjalan.
+
+---
+
+## 2. TECH STACK
+
+Project menggunakan:
+
+- Laravel
+- Blade
+- Laravel Breeze
+- Tailwind CSS
+- Alpine.js
+- Vite
+
+Project TIDAK menggunakan Bootstrap.
+
+Styling utama:
+Tailwind CSS
+
+Frontend interaction:
+Alpine.js
+
+Asset bundling:
+Vite
+
+---
+
+## 3. MENJALANKAN PROJECT
+
+Terminal 1:
+
+php artisan serve
+
+Terminal 2:
+
+npm run dev
+
+npm run dev diperlukan saat development agar Vite/Tailwind aktif.
+
+Project dapat berjalan secara lokal tanpa internet selama dependency dan asset lokal tersedia.
+
+Catatan:
+Font saat ini menggunakan Bunny Fonts sehingga font tersebut dapat membutuhkan internet.
+
+---
+
+## 4. AUTHENTICATION
+
+Authentication menggunakan Laravel Breeze.
+
+Folder:
+
+resources/views/auth/
+
+File:
+
+login.blade.php
+register.blade.php
+forgot-password.blade.php
+
+Authentication logic Breeze tetap dipertahankan.
+
+Yang diubah adalah UI/tampilan.
+
+---
+
+## 5. GUEST LAYOUT
+
+File:
+
+resources/views/layouts/guest.blade.php
+
+Digunakan untuk:
+
+- Login
+- Register
+- Forgot Password
+
+Asset menggunakan:
+
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+
+---
+
+## 6. APP NAME
+
+Blade menggunakan:
+
+{{ config('app.name', 'Laravel') }}
+
+Nilainya berasal dari .env:
+
+APP_NAME="ODS Law Firm"
+
+Jangan mengubah APP_KEY.
+
+Jika perubahan .env belum terbaca:
+
+php artisan config:clear
+php artisan cache:clear
+
+---
+
+## 7. ROLE
+
+Role aplikasi:
+
+- admin
+- lawyer
+- staff
+
+Menu ADMIN:
+
+- Dashboard
+- User Management
+- Klien
+- Perkara
+- Lawyer
+- Dokumen
+- Agenda Sidang
+
+Menu LAWYER:
+
+- Dashboard
+- Perkara
+- Dokumen
+- Agenda Sidang
+
+Menu STAFF:
+
+- Dashboard
+- Klien
+- Dokumen
+- Agenda Sidang
+
+---
+
+## 8. DASHBOARD BERDASARKAN ROLE
+
+Dashboard dipisahkan berdasarkan role.
+
+Jangan mengasumsikan ada:
+
+resources/views/dashboard.blade.php
+
+Dashboard yang sudah diketahui:
+
+resources/views/users/dashboard.blade.php
+
+Struktur konsep:
+
+resources/views/
+    layouts/
+        app.blade.php
+        guest.blade.php
+        navigation.blade.php
+
+    users/
+        dashboard.blade.php
+
+    lawyers/
+        dashboard.blade.php
+
+    staff/
+        dashboard.blade.php
+
+Jika perlu mengetahui dashboard role tertentu, cek routes/web.php terlebih dahulu untuk melihat route -> controller -> view.
+
+---
+
+## 9. SIDEBAR
+
+File:
+
+resources/views/layouts/navigation.blade.php
+
+Awalnya project menggunakan topbar/navbar Breeze.
+
+Topbar sudah diubah menjadi sidebar.
+
+Sidebar menggunakan:
+
+- Tailwind CSS
+- Alpine.js
+- Blade
+
+Konsep:
+
+SIDEBAR
+|
+|-- Logo ODS Law Firm
+|-- Dashboard
+|-- User Management (admin)
+|-- Klien
+|-- Perkara
+|-- Lawyer
+|-- Dokumen
+|-- Agenda Sidang
+|
+|-- User Information
+|-- Profile
+|-- Logout
+
+Sidebar menggunakan:
+
+w-64
+fixed
+left-0
+
+Main content menggunakan:
+
+ml-64
+
+agar tidak tertutup sidebar.
+
+Logo:
+
+asset('images/logo.png')
+
+STATUS SIDEBAR:
+
+SIDEBAR SUDAH COCOK.
+
+User menyukai desain sidebar yang sudah dibuat.
+
+Jangan merombak sidebar tanpa alasan atau tanpa permintaan user.
+
+---
+
+## 10. APP LAYOUT
+
+File:
+
+resources/views/layouts/app.blade.php
+
+App layout sekarang menggunakan konsep:
+
+App Layout
+|
+|-- Sidebar
+|
+|-- Main Content
+    |-- Header
+    |-- Page Content
+
+Sidebar dipanggil:
+
+@include('layouts.navigation')
+
+Main content menggunakan:
+
+ml-64
+
+Background utama bernuansa:
+
+bg-slate-50
+
+---
+
+## 11. ADMIN DASHBOARD
+
+File:
+
+resources/views/users/dashboard.blade.php
+
+Dashboard ini sudah mempunyai backend/data yang berjalan.
+
+Jangan menghapus atau mengganti variable backend tanpa alasan.
+
+Variable yang tersedia:
+
+$totalClients
+$totalCases
+$totalLawyers
+$totalHearings
+
+$todayHearings
+$recentCases
+$upcomingHearings
+$recentDocuments
+
+---
+
+## 12. DATA ADMIN DASHBOARD
+
+### Statistik
+
+Total Klien:
+
+$totalClients
+
+Total Perkara:
+
+$totalCases
+
+Total Lawyer:
+
+$totalLawyers
+
+Total Agenda Sidang:
+
+$totalHearings
+
+---
+
+### Reminder Sidang Hari Ini
+
+Collection:
+
+$todayHearings
+
+Field:
+
+$hearing->case->judul_perkara
+$hearing->jam
+$hearing->tempat
+$hearing->agenda
+
+Jika kosong:
+
+Tidak ada sidang hari ini.
+
+---
+
+### Perkara Terbaru
+
+Collection:
+
+$recentCases
+
+Field:
+
+$case->nomor_perkara
+$case->client->nama
+$case->lawyer->nama
+$case->status
+
+---
+
+### Agenda Sidang Terdekat
+
+Collection:
+
+$upcomingHearings
+
+Field:
+
+$hearing->tanggal_sidang
+$hearing->case->judul_perkara
+$hearing->agenda
+$hearing->status
+
+---
+
+### Dokumen Terbaru
+
+Collection:
+
+$recentDocuments
+
+Field:
+
+$document->nama_dokumen
+$document->file
+
+Download:
+
+asset('storage/'.$document->file)
+
+---
+
+## 13. ADMIN DASHBOARD REDESIGN
+
+Saat ini admin dashboard sedang dalam tahap TRIAL redesign.
+
+Dashboard lama:
+
+Statistik
+↓
+Reminder Sidang
+↓
+Perkara Terbaru
+↓
+Agenda Sidang
+↓
+Dokumen Terbaru
+
+Desain baru yang sedang dicoba:
+
+Dashboard
+Ringkasan aktivitas Law Firm
+
+[ Total Klien ]
+[ Total Perkara ]
+[ Total Lawyer ]
+[ Agenda Sidang ]
+
+[ Reminder Sidang Hari Ini ]
+
+[ Perkara Terbaru ]    [ Agenda Sidang Terdekat ]
+
+[ Dokumen Terbaru ]
+
+Tujuan redesign:
+
+- Modern
+- Clean
+- Professional
+- User-friendly
+- Mudah dibaca
+- Tidak terlalu panjang
+- Informasi penting mudah ditemukan
+
+---
+
+## 14. DESIGN STYLE
+
+Warna utama:
+
+Primary:
+Blue
+
+Background:
+Slate-50
+
+Card:
+White
+
+Border:
+Slate
+
+Text utama:
+Slate-900
+
+Text sekunder:
+Slate-500
+
+Success:
+Emerald
+
+Warning:
+Amber
+
+Danger:
+Red
+
+Style yang digunakan:
+
+rounded-xl
+rounded-2xl
+shadow-sm
+border border-slate-200
+
+Target visual:
+
+Modern Law Firm Dashboard
+Clean
+Professional
+Minimal
+Elegant
+Easy to scan
+
+Hindari:
+
+- Gradient berlebihan
+- Terlalu banyak warna
+- Shadow berat
+- UI terlalu ramai
+- Font terlalu besar
+- Tampilan seperti template generik
+
+---
+
+## 15. PRINSIP PENGEMBANGAN
+
+Prioritas:
+
+1. UI/UX modern
+2. User-friendly
+3. Clean
+4. Professional
+5. Functionality tetap berjalan
+6. Backend tidak rusak
+7. Database tidak diubah tanpa kebutuhan
+8. Route tidak diubah tanpa kebutuhan
+9. Tetap menggunakan Tailwind
+10. Perubahan dilakukan bertahap
+
+Jangan langsung mengubah banyak bagian sekaligus.
+
+Metode:
+
+Buat perubahan
+↓
+Run project
+↓
+Lihat browser
+↓
+User memberi feedback
+↓
+Revisi
+
+---
+
+## 16. BACKUP
+
+Untuk perubahan besar, backup file terlebih dahulu.
+
+Contoh:
+
+resources/views/users/dashboard.blade.php
+
+Backup:
+
+resources/views/users/dashboard.blade.backup.php
+
+Jika desain tidak cocok, restore backup.
+
+---
+
+## 17. STATUS PROJECT
+
+SUDAH:
+
+- Laravel setup
+- Laravel Breeze
+- Login
+- Register
+- Forgot Password
+- Guest layout
+- Tailwind
+- Alpine.js
+- Role-based menu
+- Topbar -> Sidebar
+- App layout disesuaikan dengan sidebar
+
+SEDANG DIKERJAKAN:
+
+Admin Dashboard UI
+
+File:
+
+resources/views/users/dashboard.blade.php
+
+BELUM:
+
+- Finalisasi Admin Dashboard
+- Lawyer Dashboard UI
+- Staff Dashboard UI
+- Clients UI
+- Cases UI
+- Lawyers UI
+- Documents UI
+- Hearings UI
+- Mobile/responsive final polish
+
+---
+
+## 18. CURRENT CHECKPOINT
+
+Checkpoint terakhir:
+
+SIDEBAR:
+SUDAH SELESAI DAN USER SUKA.
+
+ADMIN DASHBOARD:
+SEDANG TRIAL REDESIGN.
+
+File:
+
+resources/views/users/dashboard.blade.php
+
+Backend tidak perlu diubah untuk redesign saat ini.
+
+Variable yang WAJIB tetap dipertahankan:
+
+$totalClients
+$totalCases
+$totalLawyers
+$totalHearings
+$todayHearings
+$recentCases
+$upcomingHearings
+$recentDocuments
+
+---
+
+## 19. JIKA CHAT RESET
+
+Paste seluruh file PROJECT_CONTEXT.md ini ke AI.
+
+Kemudian katakan:
+
+"Ini context project gue. Baca dan pahami dulu. Lanjutkan dari CURRENT CHECKPOINT. Jangan mengulang pekerjaan yang sudah selesai dan jangan merombak backend tanpa kebutuhan."
+
+AI harus memahami:
+
+- Project Laravel
+- Blade
+- Breeze
+- Tailwind
+- Alpine.js
+- Bukan Bootstrap
+- Sidebar sudah dibuat
+- Sidebar disukai user
+- Dashboard dipisahkan berdasarkan role
+- Admin dashboard ada di users/dashboard.blade.php
+- Backend dashboard sudah berjalan
+- Variable dashboard harus dipertahankan
+- Saat ini sedang trial redesign Admin Dashboard
+- Perubahan dilakukan bertahap
+- Jangan merusak functionality existing
+---
+
+## 20. TEMUAN TERBARU — DASHBOARD ROUTING
+
+Route dashboard utama berada di:
+
+routes/web.php
+
+Route:
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
+
+Dashboard menggunakan:
+
+app/Http/Controllers/DashboardController.php
+
+Saat ini DashboardController BELUM membedakan dashboard berdasarkan role.
+
+Method:
+
+public function index()
+
+mengambil data:
+
+$totalClients
+$totalCases
+$totalLawyers
+$totalHearings
+$todayHearings
+$recentCases
+$upcomingHearings
+$recentDocuments
+
+Kemudian mengembalikan:
+
+return view('dashboard', compact(...));
+
+Artinya controller secara eksplisit mencari:
+
+resources/views/dashboard.blade.php
+
+CATATAN PENTING:
+
+Jangan mengasumsikan:
+
+resources/views/users/dashboard.blade.php
+
+adalah view yang digunakan oleh route /dashboard.
+
+Berdasarkan DashboardController yang ditemukan, route /dashboard menggunakan:
+
+resources/views/dashboard.blade.php
+
+DashboardController saat ini juga BELUM memiliki logic:
+
+if role == admin
+if role == lawyer
+if role == staff
+
+Semua role saat ini menggunakan route /dashboard dan controller yang sama.
+
+---
+
+## 21. RESOURCE ROUTES
+
+Resource berikut menggunakan Laravel Route::resource:
+
+/hearings
+/clients
+/lawyers
+/cases
+/documents
+
+Contoh:
+
+Route::resource('lawyers', LawyerController::class)
+    ->middleware('auth');
+
+Sehingga:
+
+/lawyers
+    ↓
+LawyerController@index
+    ↓
+kemungkinan besar
+resources/views/lawyers/index.blade.php
+
+Begitu juga:
+
+/clients
+    ↓
+ClientController@index
+
+/cases
+    ↓
+LegalCaseController@index
+
+/documents
+    ↓
+DocumentController@index
+
+/hearings
+    ↓
+HearingController@index
+
+PENTING:
+
+File index.blade.php pada resource seperti lawyers/index.blade.php TIDAK otomatis berarti dashboard role.
+
+Index adalah halaman resource/listing kecuali controller membuktikan sebaliknya.
+
+---
+
+## 22. KEPUTUSAN SAAT INI
+
+Untuk sementara:
+
+JANGAN membuat dashboard terpisah untuk lawyer/staff.
+
+JANGAN mengubah DashboardController.
+
+JANGAN mengubah routing dashboard.
+
+Kita SKIP pembahasan dashboard role-specific untuk sementara.
+
+Fokus kembali ke UI/UX halaman aplikasi yang sedang dikerjakan.
+
+Dashboard yang sekarang dianggap:
+
+"SO FAR OKE"
+
+dan tidak perlu dirombak lagi sampai ada kebutuhan baru.
+
+---
+
+## 23. CATATAN PENTING UNTUK AI BERIKUTNYA
+
+Jika menemukan informasi baru tentang struktur project, UPDATE PROJECT_CONTEXT.md.
+
+Jangan mempertahankan asumsi lama jika sudah terbukti salah berdasarkan file project.
+
+Selalu prioritaskan kondisi/file project yang benar-benar diberikan user dibanding asumsi dari struktur Laravel/Breeze standar.

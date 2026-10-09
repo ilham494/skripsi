@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\LegalCase;
 
 class ReportController extends Controller
 {
     public function casePdf($id)
     {
-        $pdf = Pdf::loadHTML('
-            <html>
-            <body>
-                <h1>TEST PDF</h1>
-            </body>
-            </html>
-        ');
+        $case = LegalCase::with([
+            'client',
+            'lawyer',
+            'documents',
+            'hearings',
+        ])->findOrFail($id);
 
-        return $pdf->stream('test.pdf');
+        return view('reports.case-pdf', [
+            'case' => $case,
+        ]);
     }
 }

@@ -1,513 +1,633 @@
 <x-app-layout>
 
-<x-slot name="header">
+    <x-slot name="header">
+        <div>
+            <h2 class="text-2xl font-bold text-slate-900">
+                Dashboard
+            </h2>
 
-    <h2 class="font-semibold text-xl">
-        Dashboard Law Firm
-    </h2>
+            <p class="mt-1 text-sm text-slate-500">
+                Ringkasan aktivitas Law Firm
+            </p>
+        </div>
+    </x-slot>
 
-</x-slot>
 
+    <div class="py-8">
 
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<div class="py-12">
 
-<div class="max-w-7xl mx-auto">
+            {{-- ============================= --}}
+            {{-- STATISTICS --}}
+            {{-- ============================= --}}
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
 
 
-{{-- Statistik --}}
+                {{-- CLIENTS --}}
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
 
-<div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+                    <div class="flex items-center justify-between">
 
+                        <div>
+                            <p class="text-sm font-medium text-slate-500">
+                                Total Klien
+                            </p>
 
+                            <p class="mt-2 text-3xl font-bold text-slate-900">
+                                {{ $totalClients }}
+                            </p>
+                        </div>
 
-<div class="bg-white shadow rounded-lg p-5">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
 
-<h3 class="text-gray-500">
-Total Klien
-</h3>
+                            <svg
+                                class="w-6 h-6 text-blue-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.8"
+                                    d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m4-5a4 4 0 11-8 0 4 4 0 018 0zm6 1a3 3 0 10-6 0"
+                                />
+                            </svg>
 
-<p class="text-3xl font-bold text-blue-600">
-{{ $totalClients }}
-</p>
+                        </div>
 
-</div>
+                    </div>
 
+                    <div class="mt-4 text-xs text-slate-400">
+                        Data klien terdaftar
+                    </div>
 
+                </div>
 
 
-<div class="bg-white shadow rounded-lg p-5">
+                {{-- CASES --}}
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
 
-<h3 class="text-gray-500">
-Total Perkara
-</h3>
+                    <div class="flex items-center justify-between">
 
-<p class="text-3xl font-bold text-green-600">
-{{ $totalCases }}
-</p>
+                        <div>
+                            <p class="text-sm font-medium text-slate-500">
+                                Total Perkara
+                            </p>
 
-</div>
+                            <p class="mt-2 text-3xl font-bold text-slate-900">
+                                {{ $totalCases }}
+                            </p>
+                        </div>
 
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center">
 
+                            <svg
+                                class="w-6 h-6 text-emerald-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.8"
+                                    d="M12 3l8 4v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"
+                                />
 
+                            </svg>
 
-<div class="bg-white shadow rounded-lg p-5">
+                        </div>
 
-<h3 class="text-gray-500">
-Total Lawyer
-</h3>
+                    </div>
 
-<p class="text-3xl font-bold text-purple-600">
-{{ $totalLawyers }}
-</p>
+                    <div class="mt-4 text-xs text-slate-400">
+                        Perkara dalam sistem
+                    </div>
 
-</div>
+                </div>
 
 
+                {{-- LAWYERS --}}
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
 
+                    <div class="flex items-center justify-between">
 
-<div class="bg-white shadow rounded-lg p-5">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500">
+                                Total Lawyer
+                            </p>
 
-<h3 class="text-gray-500">
-Total Agenda Sidang
-</h3>
+                            <p class="mt-2 text-3xl font-bold text-slate-900">
+                                {{ $totalLawyers }}
+                            </p>
+                        </div>
 
-<p class="text-3xl font-bold text-red-600">
-{{ $totalHearings }}
-</p>
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center">
 
-</div>
+                            <svg
+                                class="w-6 h-6 text-purple-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.8"
+                                    d="M8 21h8M12 17v4M7 4h10l2 4H5l2-4zm-2 4h14l-1 6a6 6 0 01-12 0L5 8z"
+                                />
+                            </svg>
 
+                        </div>
 
+                    </div>
 
-</div>
+                    <div class="mt-4 text-xs text-slate-400">
+                        Lawyer terdaftar
+                    </div>
 
+                </div>
 
 
+                {{-- HEARINGS --}}
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
 
+                    <div class="flex items-center justify-between">
 
-{{-- Reminder Sidang Hari Ini --}}
+                        <div>
+                            <p class="text-sm font-medium text-slate-500">
+                                Agenda Sidang
+                            </p>
 
+                            <p class="mt-2 text-3xl font-bold text-slate-900">
+                                {{ $totalHearings }}
+                            </p>
+                        </div>
 
-<div class="bg-white shadow rounded-lg p-5 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
 
+                            <svg
+                                class="w-6 h-6 text-red-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.8"
+                                    d="M8 2v4m8-4v4M3 10h18M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"
+                                />
+                            </svg>
 
-<h3 class="font-bold text-lg mb-4">
+                        </div>
 
-Reminder Sidang Hari Ini
+                    </div>
 
-</h3>
+                    <div class="mt-4 text-xs text-slate-400">
+                        Total agenda sidang
+                    </div>
 
+                </div>
 
+            </div>
 
-@if($todayHearings->count())
 
 
-<table class="w-full">
+            {{-- ============================= --}}
+            {{-- TODAY HEARINGS --}}
+            {{-- ============================= --}}
 
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm mb-6 overflow-hidden">
 
-<thead>
+                <div class="px-6 py-5 border-b border-slate-100">
 
-<tr class="border-b bg-gray-100">
+                    <div class="flex items-center justify-between">
 
-<th class="p-3 text-left">
-Perkara
-</th>
+                        <div>
 
+                            <h3 class="text-lg font-bold text-slate-900">
+                                Reminder Sidang Hari Ini
+                            </h3>
 
-<th class="p-3 text-left">
-Jam
-</th>
+                            <p class="text-sm text-slate-500 mt-1">
+                                Agenda persidangan yang berlangsung hari ini
+                            </p>
 
+                        </div>
 
-<th class="p-3 text-left">
-Tempat
-</th>
+                        <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center">
 
+                            <svg
+                                class="w-5 h-5 text-red-500"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.8"
+                                    d="M8 2v4m8-4v4M3 10h18M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"
+                                />
+                            </svg>
 
-<th class="p-3 text-left">
-Agenda
-</th>
+                        </div>
 
-</tr>
+                    </div>
 
-</thead>
+                </div>
 
 
+                @if($todayHearings->count())
 
-<tbody>
+                    <div class="overflow-x-auto">
 
+                        <table class="w-full text-sm">
 
-@foreach($todayHearings as $hearing)
+                            <thead class="bg-slate-50">
 
+                                <tr>
 
-<tr class="border-b">
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Perkara
+                                    </th>
 
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Jam
+                                    </th>
 
-<td class="p-3">
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Tempat
+                                    </th>
 
-{{ $hearing->case->judul_perkara ?? '-' }}
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Agenda
+                                    </th>
 
-</td>
+                                </tr>
 
+                            </thead>
 
-<td class="p-3">
 
-{{ $hearing->jam }}
+                            <tbody class="divide-y divide-slate-100">
 
-</td>
+                                @foreach($todayHearings as $hearing)
 
+                                    <tr class="hover:bg-slate-50 transition">
 
-<td class="p-3">
+                                        <td class="px-6 py-4 font-medium text-slate-800">
+                                            {{ $hearing->case->judul_perkara ?? '-' }}
+                                        </td>
 
-{{ $hearing->tempat }}
+                                        <td class="px-6 py-4 text-slate-600">
+                                            {{ $hearing->jam }}
+                                        </td>
 
-</td>
+                                        <td class="px-6 py-4 text-slate-600">
+                                            {{ $hearing->tempat }}
+                                        </td>
 
+                                        <td class="px-6 py-4 text-slate-600">
+                                            {{ $hearing->agenda }}
+                                        </td>
 
-<td class="p-3">
+                                    </tr>
 
-{{ $hearing->agenda }}
+                                @endforeach
 
-</td>
+                            </tbody>
 
+                        </table>
 
-</tr>
+                    </div>
 
+                @else
 
-@endforeach
+                    <div class="p-6">
 
+                        <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl p-4">
 
-</tbody>
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M5 13l4 4L19 7"
+                                />
+                            </svg>
 
+                            <span class="text-sm font-medium">
+                                Tidak ada sidang hari ini.
+                            </span>
 
-</table>
+                        </div>
 
+                    </div>
 
+                @endif
 
-@else
+            </div>
 
 
-<div class="bg-green-100 text-green-700 p-3 rounded">
 
-Tidak ada sidang hari ini.
+            {{-- ============================= --}}
+            {{-- TWO COLUMNS --}}
+            {{-- ============================= --}}
 
-</div>
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
 
 
-@endif
+                {{-- RECENT CASES --}}
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
+                    <div class="px-6 py-5 border-b border-slate-100">
 
+                        <h3 class="text-lg font-bold text-slate-900">
+                            Perkara Terbaru
+                        </h3>
 
-</div>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Perkara yang baru ditambahkan
+                        </p>
 
+                    </div>
 
 
+                    <div class="overflow-x-auto">
 
+                        <table class="w-full text-sm">
 
+                            <thead class="bg-slate-50">
 
+                                <tr>
 
-{{-- Perkara Terbaru --}}
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Nomor
+                                    </th>
 
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Klien
+                                    </th>
 
-<div class="bg-white shadow rounded-lg p-5 mb-6">
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Status
+                                    </th>
 
+                                </tr>
 
-<h3 class="font-bold text-lg mb-4">
+                            </thead>
 
-Perkara Terbaru
 
-</h3>
+                            <tbody class="divide-y divide-slate-100">
 
+                                @foreach($recentCases as $case)
 
+                                    <tr class="hover:bg-slate-50 transition">
 
-<table class="w-full">
+                                        <td class="px-6 py-4 font-medium text-slate-800">
+                                            {{ $case->nomor_perkara }}
+                                        </td>
 
+                                        <td class="px-6 py-4 text-slate-600">
+                                            {{ $case->client->nama ?? '-' }}
+                                        </td>
 
-<thead>
+                                        <td class="px-6 py-4">
 
-<tr class="border-b bg-gray-100">
+                                            <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                                                {{ $case->status }}
+                                            </span>
 
+                                        </td>
 
-<th class="p-3 text-left">
-Nomor
-</th>
+                                    </tr>
 
+                                @endforeach
 
-<th class="p-3 text-left">
-Klien
-</th>
+                            </tbody>
 
+                        </table>
 
-<th class="p-3 text-left">
-Lawyer
-</th>
+                    </div>
 
+                </div>
 
-<th class="p-3 text-left">
-Status
-</th>
 
 
-</tr>
+                {{-- UPCOMING HEARINGS --}}
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
+                    <div class="px-6 py-5 border-b border-slate-100">
 
-</thead>
+                        <h3 class="text-lg font-bold text-slate-900">
+                            Agenda Sidang Terdekat
+                        </h3>
 
+                        <p class="text-sm text-slate-500 mt-1">
+                            Jadwal persidangan berikutnya
+                        </p>
 
+                    </div>
 
-<tbody>
 
+                    <div class="overflow-x-auto">
 
-@foreach($recentCases as $case)
+                        <table class="w-full text-sm">
 
+                            <thead class="bg-slate-50">
 
-<tr class="border-b">
+                                <tr>
 
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Tanggal
+                                    </th>
 
-<td class="p-3">
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Perkara
+                                    </th>
 
-{{ $case->nomor_perkara }}
+                                    <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                        Status
+                                    </th>
 
-</td>
+                                </tr>
 
+                            </thead>
 
-<td class="p-3">
 
-{{ $case->client->nama ?? '-' }}
+                            <tbody class="divide-y divide-slate-100">
 
-</td>
+                                @foreach($upcomingHearings as $hearing)
 
+                                    <tr class="hover:bg-slate-50 transition">
 
-<td class="p-3">
+                                        <td class="px-6 py-4 text-slate-600">
+                                            {{ $hearing->tanggal_sidang }}
+                                        </td>
 
-{{ $case->lawyer->nama ?? '-' }}
+                                        <td class="px-6 py-4 font-medium text-slate-800">
+                                            {{ $hearing->case->judul_perkara ?? '-' }}
+                                        </td>
 
-</td>
+                                        <td class="px-6 py-4">
 
+                                            <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700">
+                                                {{ $hearing->status }}
+                                            </span>
 
-<td class="p-3">
+                                        </td>
 
-{{ $case->status }}
+                                    </tr>
 
-</td>
+                                @endforeach
 
+                            </tbody>
 
-</tr>
+                        </table>
 
+                    </div>
 
-@endforeach
+                </div>
 
+            </div>
 
-</tbody>
 
 
-</table>
+            {{-- ============================= --}}
+            {{-- DOCUMENTS --}}
+            {{-- ============================= --}}
 
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
-</div>
+                <div class="px-6 py-5 border-b border-slate-100">
 
+                    <div class="flex items-center justify-between">
 
+                        <div>
 
+                            <h3 class="text-lg font-bold text-slate-900">
+                                Dokumen Terbaru
+                            </h3>
 
+                            <p class="text-sm text-slate-500 mt-1">
+                                Dokumen yang baru ditambahkan ke sistem
+                            </p>
 
+                        </div>
 
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
 
-{{-- Agenda Sidang Terdekat --}}
+                            <svg
+                                class="w-5 h-5 text-blue-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.8"
+                                    d="M7 3h7l5 5v13H7a2 2 0 01-2-2V5a2 2 0 012-2z"
+                                />
 
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.8"
+                                    d="M14 3v6h5"
+                                />
+                            </svg>
 
-<div class="bg-white shadow rounded-lg p-5 mb-6">
+                        </div>
 
+                    </div>
 
-<h3 class="font-bold text-lg mb-4">
+                </div>
 
-Agenda Sidang Terdekat
 
-</h3>
+                <div class="overflow-x-auto">
 
+                    <table class="w-full text-sm">
 
+                        <thead class="bg-slate-50">
 
-<table class="w-full">
+                            <tr>
 
+                                <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                    Nama Dokumen
+                                </th>
 
-<thead>
+                                <th class="px-6 py-3 text-left font-semibold text-slate-500">
+                                    File
+                                </th>
 
-<tr class="border-b bg-gray-100">
+                            </tr>
 
+                        </thead>
 
-<th class="p-3 text-left">
-Tanggal
-</th>
 
+                        <tbody class="divide-y divide-slate-100">
 
-<th class="p-3 text-left">
-Perkara
-</th>
+                            @foreach($recentDocuments as $document)
 
+                                <tr class="hover:bg-slate-50 transition">
 
-<th class="p-3 text-left">
-Agenda
-</th>
+                                    <td class="px-6 py-4 font-medium text-slate-800">
+                                        {{ $document->nama_dokumen }}
+                                    </td>
 
+                                    <td class="px-6 py-4">
 
-<th class="p-3 text-left">
-Status
-</th>
+                                        <a
+                                            href="{{ asset('storage/'.$document->file) }}"
+                                            target="_blank"
+                                            class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold hover:bg-blue-100 transition"
+                                        >
 
+                                            <svg
+                                                class="w-4 h-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.8"
+                                                    d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
+                                                />
+                                            </svg>
 
-</tr>
+                                            Download
 
+                                        </a>
 
-</thead>
+                                    </td>
 
+                                </tr>
 
+                            @endforeach
 
-<tbody>
+                        </tbody>
 
+                    </table>
 
-@foreach($upcomingHearings as $hearing)
+                </div>
 
+            </div>
 
-<tr class="border-b">
 
+        </div>
 
-<td class="p-3">
-
-{{ $hearing->tanggal_sidang }}
-
-</td>
-
-
-<td class="p-3">
-
-{{ $hearing->case->judul_perkara ?? '-' }}
-
-</td>
-
-
-<td class="p-3">
-
-{{ $hearing->agenda }}
-
-</td>
-
-
-<td class="p-3">
-
-{{ $hearing->status }}
-
-</td>
-
-
-</tr>
-
-
-@endforeach
-
-
-</tbody>
-
-
-</table>
-
-
-</div>
-
-
-
-
-
-
-
-{{-- Dokumen Terbaru --}}
-
-
-<div class="bg-white shadow rounded-lg p-5">
-
-
-<h3 class="font-bold text-lg mb-4">
-
-Dokumen Terbaru
-
-</h3>
-
-
-<table class="w-full">
-
-
-<thead>
-
-<tr class="border-b bg-gray-100">
-
-
-<th class="p-3 text-left">
-Nama Dokumen
-</th>
-
-
-<th class="p-3 text-left">
-File
-</th>
-
-
-</tr>
-
-
-</thead>
-
-
-
-<tbody>
-
-
-@foreach($recentDocuments as $document)
-
-
-<tr class="border-b">
-
-
-<td class="p-3">
-
-{{ $document->nama_dokumen }}
-
-</td>
-
-
-<td class="p-3">
-
-
-<a href="{{ asset('storage/'.$document->file) }}"
-target="_blank"
-class="text-blue-600">
-
-Download
-
-</a>
-
-
-</td>
-
-
-</tr>
-
-
-@endforeach
-
-
-</tbody>
-
-
-</table>
-
-
-</div>
-
-
-
-</div>
-
-</div>
-
+    </div>
 
 </x-app-layout>

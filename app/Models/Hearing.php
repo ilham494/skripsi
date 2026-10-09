@@ -12,7 +12,8 @@ class Hearing extends Model
         'jam',
         'tempat',
         'agenda',
-        'status'
+        'status',
+        'hasil_persidangan',
     ];
 
 
